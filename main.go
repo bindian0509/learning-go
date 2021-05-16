@@ -89,10 +89,22 @@ func main() {
 			zipCode: 122001,
 		},
 	}
+	name := "Bill"
+	fmt.Println(&name)
+
 	fmt.Println(bharat)
 	//bharatPointer := &bharat
-	bharat.updateFirstName("Sonu")
+	bharat.updateFirstName("Sonu") // - this can work as well thanks to Go!
 	bharat.print()
+
+	greetings := []string{"Hi", "there", "I", "want", "to", "rail", "you!"}
+	fmt.Println(greetings)
+	updateSlice(greetings) // this is blasphemy from Go!
+	fmt.Println(greetings)
+}
+func updateSlice(s []string) {
+	s[0] = "Bye"
+
 }
 
 type person struct {
