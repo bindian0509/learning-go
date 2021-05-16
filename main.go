@@ -90,8 +90,8 @@ func main() {
 		},
 	}
 	fmt.Println(bharat)
-	bharatPointer := &bharat
-	bharatPointer.updateFirstName("Sonu")
+	//bharatPointer := &bharat
+	bharat.updateFirstName("Sonu")
 	bharat.print()
 }
 
