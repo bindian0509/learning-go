@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	
 )
 
 type deck []string
@@ -65,3 +66,19 @@ func (d deck) shuffle() {
 		d[i], d[newPosition] = d[newPosition], d[i]
 	}
 }
+
+func maxProfit(prices []int) int {
+	
+	profit := 0
+	cheapest := prices[0]
+	for _, price := range prices {
+		if price < cheapest {
+			cheapest = price
+		}
+		if price - cheapest > profit {
+			profit = price - cheapest
+		}
+	}
+	return profit
+}
+
