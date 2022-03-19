@@ -84,11 +84,6 @@ func main() {
 	nums := []int{3, 6, 9, 1, 3, 0, 5, 3, 4}
 	log.Println(nums[2:])
 
-	profit1 := maxProfit([]int{7, 1, 5, 3, 6, 4})
-	profit2 := maxProfit([]int{1, 2, 3, 4, 5})
-	profit3 := maxProfit([]int{7, 6, 4, 3, 1})
-	fmt.Printf("Profits are %v , %v, %v:", profit1, profit2, profit3)
-
 	sentence := "My Name is Anthony Gonsalves"
 
 	for i, l := range sentence {
@@ -145,17 +140,4 @@ func changeViaPointer(s *string) {
 func Whatever() {
 
 	log.Println("Whatever")
-}
-
-func maxProfit(prices []int) int {
-
-	maxProfit := 0
-
-	for i := 1; i < len(prices); i++ {
-		if prices[i] > prices[i-1] {
-			maxProfit += prices[i] - prices[i-1]
-		}
-	}
-
-	return maxProfit
 }
