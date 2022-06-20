@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"github.com/bindian0509/learning-go/webapphtml/pkg/render"
+	"github.com/bindian0509/learning-go/web-app-html/pkg/render"
 )
 
 // Home is the home page handler

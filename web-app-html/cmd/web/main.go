@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"github.com/bindian0509/learning-go/webapphtml/pkg/handlers"
+	"github.com/bindian0509/learning-go/web-app-html/pkg/handlers"
 )
 
 const portNum = ":8080"
