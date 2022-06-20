@@ -1,5 +1,4 @@
-package renders
-
+package render
 
 import (
 	"fmt"
