@@ -1,3 +1,3 @@
-module github.com/bindian0509/learning-go/web-app-html
+module github.com/bindian0509/learning-go
 
 go 1.18
