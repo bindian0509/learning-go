@@ -1,9 +1,8 @@
-package "web-app-html"
+package main
 
 import (
 	"fmt"
 	"net/http"
-
 	"github.com/bindian0509/learning-go/web-app-html/pkg/handlers"
 )
 
