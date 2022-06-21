@@ -23,10 +23,14 @@ func main() {
 		log.Fatal("Error creating template cache ", err)
 	}
 	app.TemplateCache = tc 
+	app.UseCache = false 
+	
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandlers(repo)
 	render.NewTemplate(&app)
 
-	http.HandleFunc("/", handlers.Home)
-	http.HandleFunc("/about", handlers.About)
+	http.HandleFunc("/", handlers.Repo.Home)
+	http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Println(fmt.Sprintf("Starting web-app application the first go web application on port %s", portNum))
 	http.ListenAndServe(portNum, nil)
