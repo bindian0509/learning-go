@@ -7,7 +7,9 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
 	"github.com/bindian0509/learning-go/web-app-html/pkg/config"
+	"github.com/bindian0509/learning-go/web-app-html/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -18,8 +20,12 @@ func NewTemplate(a *config.AppConfig) {
 	app = a 
 }
 
+func AddDefaultData (td *models.TemplateData) *models.TemplateData {
+	return td
+}
+
 // RenderTemplate renders templates using html
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -33,7 +39,8 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 		log.Fatal("Could not get template from template cache")
 	}
 	buf := new(bytes.Buffer)
-	_ = t.Execute(buf, nil)
+	td = AddDefaultData(td)
+	_ = t.Execute(buf, td)
 	_, err := buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("Error writing template to browser : ", err )
