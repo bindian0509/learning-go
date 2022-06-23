@@ -29,9 +29,16 @@ func main() {
 	handlers.NewHandlers(repo)
 	render.NewTemplate(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	//http.HandleFunc("/", handlers.Repo.Home)
+	//http.HandleFunc("/about", handlers.Repo.About)
 
-	fmt.Println(fmt.Sprintf("Starting web-app application the first go web application on port %s", portNum))
-	http.ListenAndServe(portNum, nil)
+	fmt.Printf("Starting web-app application the first go web application on port %s", portNum)
+	//http.ListenAndServe(portNum, nil)
+	serve := &http.Server{
+		Addr: portNum,
+		Handler: routes(&app),
+	}
+
+	err = serve.ListenAndServe()
+	log.Fatal(err)
 }
