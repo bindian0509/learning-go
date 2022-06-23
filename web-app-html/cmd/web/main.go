@@ -4,18 +4,34 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
+	"time"
+	"github.com/alexedwards/scs/v2"
 	"github.com/bindian0509/learning-go/web-app-html/pkg/config"
 	"github.com/bindian0509/learning-go/web-app-html/pkg/handlers"
 	"github.com/bindian0509/learning-go/web-app-html/pkg/render"
 )
 
+// port for debugging
 const portNum = ":8080"
+// get the template cache from app config 
+var app config.AppConfig
+// session for variable shadowing 
+var session *scs.SessionManager
 
 // main - open the link - http://localhost:8080/
 func main() {
-	// get the template cache from app config 
-	var app config.AppConfig
+
+	// change this to true in production
+	app.InProduction = false
+	// remove the fucking : to prevent re-initialization 
+	session = scs.New()
+	
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+
+	app.Session = session
 
 	tc, err := render.CreateTemplateCache()
 
@@ -40,5 +56,7 @@ func main() {
 	}
 
 	err = serve.ListenAndServe()
-	log.Fatal(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
