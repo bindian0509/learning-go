@@ -1,4 +1,6 @@
-# Bookings and Reservations (AirBnB Type Sample Web Application)
+# Bookings and Reservations 
+## AirBnB Type Sample Web Application
+
 
 The repository for [Building Modern Web Applications with Go](https://www.udemy.com/course/building-modern-web-applications-with-go/).
 
