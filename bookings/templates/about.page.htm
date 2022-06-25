@@ -1,11 +1,18 @@
 {{template "base" .}}
-
 {{define "content"}}
     <div class="container">
         <div class="row">
             <div class="col">
                 <h1>This is the about page</h1>
+                <p> <h3>This is some <b> !@#$%^&*(*) ABOUT TEXT )(*&^%$#@!) </b> ... </h3></p>
 
+                {{if ne (index .StringMap "remoteIP") ""}}
+                <p>Your remote IP address is <b> {{index .StringMap "remoteIP"}} </b></p>
+                {{else}}
+                <p>I don't know your IP address ... hacking failed!!! :( <a href="/">Go Back!!</a></p>
+                {{end}}
+
+                <p>This came from the template: {{index .StringMap "test"}}</p>
             </div>
         </div>
     </div>
