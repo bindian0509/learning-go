@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 
@@ -41,4 +44,22 @@ func countOdds(low int, high int) int {
 		N++
 	}
 	return N
+}
+
+func fib(n int) int {
+    goldenRatio := (1 + math.Sqrt(5) ) / 2
+	return int(math.Round(math.Pow(goldenRatio, (float64(n)))/math.Sqrt(5)))
+}
+func fibZeroComplexity(n int) int {
+    dp := make([]int, n + 1)
+    if n == 0 || n == 1 {
+        return n
+    }
+    dp[0] = 0
+    dp[1] = 1
+    for i := 2; i <= n; i++ {
+        dp[i] = dp[i - 1] + dp[i - 2]
+    }
+    
+    return dp[n]
 }
