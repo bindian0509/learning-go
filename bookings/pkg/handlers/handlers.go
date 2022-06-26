@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/bindian0509/learning-go/bookings/pkg/config"
@@ -31,7 +33,7 @@ func NewHandlers(r *Repository) {
 
 // Home is the handler for the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	// adding remote ip to the session 
+	// adding remote ip to the session
 	remoteIP := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remoteIP", remoteIP)
 
@@ -78,11 +80,27 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "contact.page.htm", r, &models.TemplateData{})
 }
 
-func (m *Repository) PostAvailability (w http.ResponseWriter, r *http.Request) {
-	
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	start_date := r.Form.Get("start")
 	end_date := r.Form.Get("end")
 	w.Write([]byte(fmt.Sprintf("So you want the availability from %s to %s", start_date, end_date)))
+}
 
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
 
+func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+	resp := jsonResponse{
+		OK: true,
+		Message: "Available!",
+	}
+	out, err := json.MarshalIndent(resp, "", "     ")
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(string(out))
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
 }
