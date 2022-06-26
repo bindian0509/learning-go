@@ -60,10 +60,6 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "make-reservation.page.htm", r, &models.TemplateData{})
 }
 
-// PostReservation handles the posting of a reservation form
-func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
-
-}
 // Generals renders the room page
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "generals.page.htm", r, &models.TemplateData{})
