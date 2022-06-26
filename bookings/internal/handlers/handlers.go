@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/bindian0509/learning-go/bookings/pkg/config"
-	"github.com/bindian0509/learning-go/bookings/pkg/models"
-	"github.com/bindian0509/learning-go/bookings/pkg/render"
+	"github.com/bindian0509/learning-go/bookings/internal/config"
+	"github.com/bindian0509/learning-go/bookings/internal/models"
+	"github.com/bindian0509/learning-go/bookings/internal/render"
 )
 
 // Repository used by the handlers
@@ -85,22 +85,23 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	end_date := r.Form.Get("end")
 	w.Write([]byte(fmt.Sprintf("So you want the availability from %s to %s", start_date, end_date)))
 }
-
 type jsonResponse struct {
 	OK      bool   `json:"ok"`
 	Message string `json:"message"`
 }
 
+// AvailabilityJSON handles request for availability and sends JSON response
 func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	resp := jsonResponse{
-		OK: true,
+		OK:      true,
 		Message: "Available!",
 	}
+
 	out, err := json.MarshalIndent(resp, "", "     ")
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(string(out))
+
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(out)
 }

@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/bindian0509/learning-go/bookings/pkg/config"
-	"github.com/bindian0509/learning-go/bookings/pkg/models"
+	"github.com/bindian0509/learning-go/bookings/internal/config"
+	"github.com/bindian0509/learning-go/bookings/internal/models"
 	"github.com/justinas/nosurf"
 )
 
@@ -76,7 +76,6 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 				return myCache, err
 			}
 		}
-
 		myCache[name] = tset 
 	}
 	return myCache, nil

@@ -5,10 +5,11 @@ import (
 	"log"
 	"net/http"
 	"time"
+
 	"github.com/alexedwards/scs/v2"
-	"github.com/bindian0509/learning-go/bookings/pkg/config"
-	"github.com/bindian0509/learning-go/bookings/pkg/handlers"
-	"github.com/bindian0509/learning-go/bookings/pkg/render"
+	"github.com/bindian0509/learning-go/bookings/internal/config"
+	"github.com/bindian0509/learning-go/bookings/internal/handlers"
+	"github.com/bindian0509/learning-go/bookings/internal/render"
 )
 
 // port for debugging
