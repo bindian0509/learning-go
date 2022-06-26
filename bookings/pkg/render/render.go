@@ -10,6 +10,7 @@ import (
 
 	"github.com/bindian0509/learning-go/bookings/pkg/config"
 	"github.com/bindian0509/learning-go/bookings/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 var functions = template.FuncMap{}
@@ -20,12 +21,13 @@ func NewTemplate(a *config.AppConfig) {
 	app = a 
 }
 
-func AddDefaultData (td *models.TemplateData) *models.TemplateData {
+func AddDefaultData (td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // RenderTemplate renders templates using html
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, r *http.Request, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -39,7 +41,9 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 		log.Fatal("Could not get template from template cache")
 	}
 	buf := new(bytes.Buffer)
-	td = AddDefaultData(td)
+	
+	td = AddDefaultData(td, r)
+
 	_ = t.Execute(buf, td)
 	_, err := buf.WriteTo(w)
 	if err != nil {

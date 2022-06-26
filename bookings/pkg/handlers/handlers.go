@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/bindian0509/learning-go/bookings/pkg/config"
@@ -34,7 +35,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIP := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remoteIP", remoteIP)
 
-	render.RenderTemplate(w, "home.page.htm", &models.TemplateData{})
+	render.RenderTemplate(w, "home.page.htm", r, &models.TemplateData{})
 }
 
 // About is the handler for the about page
@@ -47,32 +48,41 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap["remoteIP"] = remoteIP
 
 	// send data to the template
-	render.RenderTemplate(w, "about.page.htm", &models.TemplateData{
+	render.RenderTemplate(w, "about.page.htm", r, &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
 
 // Reservation renders the make a reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "make-reservation.page.htm", &models.TemplateData{})
+	render.RenderTemplate(w, "make-reservation.page.htm", r, &models.TemplateData{})
 }
 
 // Generals renders the room page
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "generals.page.htm", &models.TemplateData{})
+	render.RenderTemplate(w, "generals.page.htm", r, &models.TemplateData{})
 }
 
 // Majors renders the room page
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "majors.page.htm", &models.TemplateData{})
+	render.RenderTemplate(w, "majors.page.htm", r, &models.TemplateData{})
 }
 
 // Availability renders the search availability page
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "search-availability.page.htm", &models.TemplateData{})
+	render.RenderTemplate(w, "search-availability.page.htm", r, &models.TemplateData{})
 }
 
 // Contact renders the contact page
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "contact.page.htm", &models.TemplateData{})
+	render.RenderTemplate(w, "contact.page.htm", r, &models.TemplateData{})
+}
+
+func (m *Repository) PostAvailability (w http.ResponseWriter, r *http.Request) {
+	
+	start_date := r.Form.Get("start")
+	end_date := r.Form.Get("end")
+	w.Write([]byte(fmt.Sprintf("So you want the availability from %s to %s", start_date, end_date)))
+
+
 }
