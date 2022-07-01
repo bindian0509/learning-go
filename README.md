@@ -1,3 +1,3 @@
 # learning-go
 
-Souce : [https://acquia.udemy.com/course/go-the-complete-developers-guide/]
+Started learning go from various platforms, specially from Udemy.
