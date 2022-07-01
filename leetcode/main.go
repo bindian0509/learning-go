@@ -63,3 +63,22 @@ func fibZeroComplexity(n int) int {
     
     return dp[n]
 }
+/**
+* Runtime: 7 ms, faster than 12.66% 
+* Memory Usage: 2.7 MB, less than 89.51%
+**/
+func runningSum (nums [] int) [] int {
+
+	for i:= 1; i < len (nums) ; i++ {
+		nums[i] += nums[i-1]
+	}
+	return nums 
+}
+func runningSumFastest(nums []int) []int {
+    runningSum := make([]int,len(nums))
+    runningSum[0] = nums[0]
+    for i:=1; i<len(nums); i++ {
+        runningSum[i] = nums[i] + runningSum[i-1]
+    }
+    return runningSum
+}
