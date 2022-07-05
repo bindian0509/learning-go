@@ -37,7 +37,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIP := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remoteIP", remoteIP)
 
-	render.RenderTemplate(w, "home.page.htm", r, &models.TemplateData{})
+	render.RenderTemplate(w,  r,"home.page.htm", &models.TemplateData{})
 }
 
 // About is the handler for the about page
@@ -50,34 +50,34 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap["remoteIP"] = remoteIP
 
 	// send data to the template
-	render.RenderTemplate(w, "about.page.htm", r, &models.TemplateData{
+	render.RenderTemplate(w,  r,"about.page.htm", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
 
 // Reservation renders the make a reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "make-reservation.page.htm", r, &models.TemplateData{})
+	render.RenderTemplate(w,  r,"make-reservation.page.htm", &models.TemplateData{})
 }
 
 // Generals renders the room page
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "generals.page.htm", r, &models.TemplateData{})
+	render.RenderTemplate(w,  r,"generals.page.htm",  &models.TemplateData{})
 }
 
 // Majors renders the room page
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "majors.page.htm", r, &models.TemplateData{})
+	render.RenderTemplate(w,  r,"majors.page.htm",  &models.TemplateData{})
 }
 
 // Availability renders the search availability page
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "search-availability.page.htm", r, &models.TemplateData{})
+	render.RenderTemplate(w,  r,"search-availability.page.htm", &models.TemplateData{})
 }
 
 // Contact renders the contact page
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "contact.page.htm", r, &models.TemplateData{})
+	render.RenderTemplate(w,  r,"contact.page.htm", &models.TemplateData{})
 }
 
 func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
