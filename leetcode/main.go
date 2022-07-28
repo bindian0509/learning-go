@@ -5,7 +5,65 @@ import (
 	"math"
 )
 
+
+func is_rotation(arr1 [] int, arr2 [] int) bool {
+
+	if len(arr1) != len(arr2) {
+		return false
+	}
+	loc := -1
+
+	for i := 0; i < len(arr2); i++ {
+		if arr2[i] == arr1[0] {
+			loc = i
+		}
+	}
+	if loc == -1 {
+		return false
+	}
+
+	idx := 0
+
+	for idx < len(arr1) {
+		if loc == len(arr2) {
+			loc = 0
+		}
+
+		if arr1[idx] != arr2[loc] {
+			return false
+		}
+		idx++
+		loc++
+	}
+
+
+	return true
+}
+
+
 func main() {
+	arr1 := [] int {1,2,3,4,5,6,7}
+	arr2 := [] int {4, 5, 6, 7, 1, 2, 3, 10, 11}
+
+	fmt.Println(is_rotation(arr1, arr2))
+	// false
+
+	array2b := [] int {4, 5, 6, 7, 1, 2, 3}
+	fmt.Println(is_rotation(arr1, array2b))
+	//# this will print true
+
+	array2c := [] int {4, 5, 6, 9, 1, 2, 3}
+	fmt.Println(is_rotation(arr1, array2c))
+	//# this will print false
+
+	array2e := [] int {4, 5, 6, 7, 0, 2, 3}
+	fmt.Println(is_rotation(arr1, array2e))
+	//# this will print false
+
+	array2f := [] int {1, 2, 3, 4, 5, 6, 7}
+	fmt.Println(is_rotation(arr1, array2f))
+	//# this will print true
+
 
 	profit1 := maxProfit([]int{7, 1, 5, 3, 6, 4})
 	profit2 := maxProfit([]int{1, 2, 3, 4, 5})
@@ -60,11 +118,11 @@ func fibZeroComplexity(n int) int {
     for i := 2; i <= n; i++ {
         dp[i] = dp[i - 1] + dp[i - 2]
     }
-    
+
     return dp[n]
 }
 /**
-* Runtime: 7 ms, faster than 12.66% 
+* Runtime: 7 ms, faster than 12.66%
 * Memory Usage: 2.7 MB, less than 89.51%
 **/
 func runningSum (nums [] int) [] int {
@@ -72,7 +130,7 @@ func runningSum (nums [] int) [] int {
 	for i:= 1; i < len (nums) ; i++ {
 		nums[i] += nums[i-1]
 	}
-	return nums 
+	return nums
 }
 func runningSumFastest(nums []int) []int {
     runningSum := make([]int,len(nums))
