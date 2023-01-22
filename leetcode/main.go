@@ -140,3 +140,19 @@ func runningSumFastest(nums []int) []int {
     }
     return runningSum
 }
+
+func maxSubArray(nums []int) int {
+	sum := math.MinInt
+	curr := 0;
+
+	for i := 0; i < len(nums); i++ {
+		curr = curr + nums[i]
+		if curr > sum {
+			sum = curr
+		}
+		if curr < 0 {
+			curr = 0
+		}
+	}
+	return sum
+}
