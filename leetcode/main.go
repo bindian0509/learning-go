@@ -156,3 +156,25 @@ func maxSubArray(nums []int) int {
 	}
 	return sum
 }
+
+func hammingWeight(num uint32) int {
+
+	ones := 0;
+	for i := 0; i < 32; i++ {
+		lsb := num & 1;
+		if lsb == 1 {
+			ones++;
+		}
+		num = num >> 1;
+	}
+
+	return ones;
+}
+func hammingWeightZeroMS(num uint32) int {
+    weight := 0
+    for num != 0 {
+        weight += 1
+        num = num & (num - 1)
+    }
+    return weight
+}
