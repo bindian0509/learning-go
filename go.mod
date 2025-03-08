@@ -1,13 +1,11 @@
 module github.com/bindian0509/learning-go
 
-go 1.22.0
-
-toolchain go1.24.0
+go 1.24.0
 
 require (
 	github.com/gin-gonic/gin v1.9.1
 	google.golang.org/grpc v1.71.0
-	google.golang.org/protobuf v1.36.4
+	google.golang.org/protobuf v1.36.5
 )
 
 require (
