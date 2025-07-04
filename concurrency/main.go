@@ -5,8 +5,26 @@ import (
 	"net/http"
 	"time"
 )
+func greet(phrase string) {
+	fmt.Println("Hello!", phrase)
+}
 
+func slowGreet(phrase string, done_chan chan bool) {
+	time.Sleep(3 * time.Second) // simulate a slow, long-taking task
+	fmt.Println("Hello!", phrase)
+	done_chan <- true
+}
 func main() {
+
+
+	go greet("How are you?")
+	go greet("Nice to meet you!")
+	go greet("I hope you're liking the course!")
+	channel := make (chan bool)
+	go slowGreet("How ... are ... you ...?", channel)
+	fmt.Println(<-channel)
+
+	/*
 
 	links := []string{
 		"https://www.google.fr",
@@ -25,17 +43,13 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	/* for i := 0; i < len(links); i++ {
-		fmt.Println(<-c)
-	} */
-
 	for l := range c {
 		go func(link string) {
 			time.Sleep(5 * time.Second)
 			checkLink(link, c)
 		}(l)
 	}
-
+	*/
 }
 
 func checkLink(link string, c chan string) {
