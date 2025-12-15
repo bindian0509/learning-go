@@ -42,6 +42,13 @@ func is_rotation(arr1 [] int, arr2 [] int) bool {
 
 
 func main() {
+	urls := []string{
+		"https://example.com",
+		"https://golang.org",
+	}
+	fetchAll(urls)
+	fmt.Println("--------------------------------")
+
 	arr1 := [] int {1,2,3,4,5,6,7}
 	arr2 := [] int {4, 5, 6, 7, 1, 2, 3, 10, 11}
 
@@ -177,4 +184,60 @@ func hammingWeightZeroMS(num uint32) int {
         num = num & (num - 1)
     }
     return weight
+}
+type TreeNode struct {
+	Val int
+	Left *TreeNode
+	Right *TreeNode
+}
+
+func maxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0;
+	} else {
+		leftDepth := maxDepth(root.Left);
+		rightDepth := maxDepth(root.Right);
+		if leftDepth > rightDepth {
+			return leftDepth + 1;
+		} else {
+			return rightDepth + 1;
+		}
+	}
+}
+
+func topKFrequent(nums []int, k int) []int {
+	numsMap := make(map[int]int)
+    for _, num := range(nums) {
+        numsMap[num] += 1
+    }
+
+    buckets := make([][]int, len(nums) + 1)
+    for num, cnt := range(numsMap) {
+        buckets[cnt] = append(buckets[cnt], num)
+    }
+
+    res := make([]int, 0)
+    for idx := len(buckets) - 1; idx >= 0; idx -= 1 {
+        for len(buckets[idx]) > 0 && len(res) < k {
+            l := len(buckets[idx]) - 1
+            num := buckets[idx][l]
+            res = append(res, num)
+            buckets[idx] = buckets[idx][:l]
+        }
+    }
+    return res
+}
+// working logic 
+func lengthOfLastWord(s string) int {
+	i := len(s) - 1
+	for i >= 0 && s[i] == ' ' {
+		i--
+	}
+
+	length := 0
+	for i >= 0 && s[i] != ' ' {
+		length++
+		i--
+	}
+	return length
 }
