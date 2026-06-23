@@ -185,6 +185,7 @@ func hammingWeightZeroMS(num uint32) int {
     }
     return weight
 }
+
 type TreeNode struct {
 	Val int
 	Left *TreeNode
@@ -227,7 +228,7 @@ func topKFrequent(nums []int, k int) []int {
     }
     return res
 }
-// working logic 
+// working logic
 func lengthOfLastWord(s string) int {
 	i := len(s) - 1
 	for i >= 0 && s[i] == ' ' {
@@ -240,4 +241,23 @@ func lengthOfLastWord(s string) int {
 		i--
 	}
 	return length
+}
+
+func productExceptSelf (nums [] int) [] int {
+
+	arr := make([]int,len(nums))
+
+	arr[0] = 1
+
+	for i := 1; i < len(nums); i++ {
+		arr[i] = arr[i-1] * nums[i-1]
+	}
+
+	postFix := 1
+
+	for i := len(nums) - 1; i >= 0; i-- {
+		arr[i] = arr[i] * postFix
+		postFix = postFix * nums[i]
+	}
+	return arr
 }
