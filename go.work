@@ -1,0 +1,10 @@
+go 1.26.5
+
+use (
+	.
+	./bookings
+	./checksum
+	./concurrency
+	./web-app
+	./web-app-html
+)
